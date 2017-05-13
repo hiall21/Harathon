@@ -25,7 +25,7 @@ SECRET_KEY = 'jv32(4&+r9)5d&bbt08r1ah*xueqip%kpzt+rjy@t7%3dm!c^e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hiall21.pythonanywhere.com']
 
 
 # Application definition
