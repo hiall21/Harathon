@@ -1,7 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .models import Post, Comment#, Photo
+from .forms import PostForm, CommentForm#, ImageExampleForm
+from django.core.urlresolvers import reverse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def post_list(request):
@@ -24,6 +28,18 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+
+# def upload(request):
+#     if request.method == "POST":
+#         form = ImageExampleForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             post=Photo()
+#             post.author = form.cleaned_data["image"]
+#             post.save()
+#             return redirect('post_detail', pk=post.pk)
+#     else:
+#         form = ImageExampleForm()
+#     return render(request, "blog/post_image_edit.html", {'form': form})
 
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -75,3 +91,36 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('post_detail', pk=comment.post.pk)
+
+def signup(request):
+    if request.method == "POST":
+        userform = UserCreationForm(request.POST)
+        if userform.is_valid():
+            userform.save()
+
+            return HttpResponseRedirect(
+                reverse("signup_ok")
+            )
+    elif request.method == "GET":
+        userform = UserCreationForm()
+
+    return render(request, "blog/signup.html", {"userform": userform,})
+
+def user_login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None and user.is_active:
+            login(request, user)
+            return redirect('/')
+        else:
+            error = "Invalid login"
+        return render(request, 'blog/login.html', {'error': error})
+    return render(request, 'blog/login.html')
+
+def user_logout(request):
+    if request.user.is_authenticated():
+        logout(request)
+    return redirect('/')
