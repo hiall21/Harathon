@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+  <div class="post-list col-md-6">
     <div class="post">
         {% if post.published_date %}
             <div class="date">
@@ -31,10 +32,11 @@
         </div>
         <strong>{{ comment.author }}</strong>
         <p>{{ comment.text|linebreaks }}</p>
-        
+
     </div>
     {% endif %}
 {% empty %}
     <p>No comments here yet :(</p>
 {% endfor %}
+</div>
 {% endblock %}

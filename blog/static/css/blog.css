@@ -49,3 +49,14 @@ h1, h2, h3, h4 {
 .comment {
     margin: 20px 0px 20px 20px;
 }
+
+.post-list {
+  display: inline-block;
+}
+
+.post-rem {
+  float: right;
+  height: 500px;
+  background-color: yellow;
+  display: inline-block;
+}

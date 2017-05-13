@@ -124,3 +124,16 @@ def user_logout(request):
     if request.user.is_authenticated():
         logout(request)
     return redirect('/')
+
+# def memo(request):
+#     if request.method == "POST":
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.author = request.user
+# #            post.published_date = timezone.now()
+#             post.save()
+#             return redirect('post_list', pk=post.pk)
+#     else:
+#         form = PostForm()
+#     return render(request, 'blog/memo.html', {'form': form})

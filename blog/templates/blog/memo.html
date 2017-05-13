@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-  <div class="post-list col-md-6">
+  <div class="post-rem col-md-6">
     <h1>New post</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
@@ -9,3 +9,5 @@
     </form>
   </div>
 {% endblock %}
+
+<!-- UNCOMPLETED HTML -->

@@ -1,8 +1,10 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-  <form id="signup" method="post" action"{% url 'signup' %}">
-    {% csrf_token %}
-    {{ userform.as_p }}
-    <button type="submit" class="save btn btn-default">Save</button>
-  </form>
+  <div class="post-list col-md-6">
+    <form id="signup" method="post" action"{% url 'signup' %}">
+      {% csrf_token %}
+      {{ userform.as_p }}
+      <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+  </div>
 {% endblock %}
